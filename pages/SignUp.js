@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from 'react'
+import Link from 'next/link';
 
 function SignUp() {
     const [name, setName] = useState('');
@@ -116,7 +117,7 @@ function SignUp() {
                             SIGN UP
                         </button>
                         <span className='cliffhanger'>
-                            Already registered? <a href='/'>Login!</a>
+                            Already registered? <Link href='/'><a>Login!</a></Link>
                         </span>
                     </div>
                     {success ?

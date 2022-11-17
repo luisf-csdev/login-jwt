@@ -25,7 +25,8 @@
 //     </Router>
 //   );
 // }
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment } from 'react';
+import Link from 'next/link';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -103,7 +104,7 @@ function Login() {
               LOG IN
             </button>
             <span className='cliffhanger'>
-              Not registered? <a href='/SignUp'> Sign Up!</a>
+              Not registered? <Link href='/SignUp'><a>Sign Up!</a></Link>
             </span>
           </div>
           {success ?
