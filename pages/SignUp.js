@@ -1,25 +1,18 @@
-import React, { Component, Fragment } from 'react'
+import React, { useState, Fragment } from 'react'
 
-var show = false;
-export default class SignUp extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            name: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-            noMatch: false,
-            success: false
-        }
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
+function SignUp() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [success, setSuccess] = useState(false);
+    const [show, setShow] = useState(false);
+    const [noMatch, setNoMatch] = useState(false);
 
-    handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
-        const { name, email, password, confirmPassword } = this.state
         if (password === confirmPassword) {
-            this.setState({ noMatch: false })
+            setNoMatch(false);
             fetch('http://localhost:3001/register', {
                 method: 'POST',
                 crossDomain: true,
@@ -37,61 +30,61 @@ export default class SignUp extends Component {
                 .then(res => res.json())
                 .then(data => {
                     if (data.status === 'ok') {
-                        this.setState({ success: true });
+                        setSuccess(true);
                         setTimeout(() => {
                             window.location.href = './sign-in'
                         }, 1000);
                     }
                 })
         } else {
-            this.setState({ noMatch: true })
+            setNoMatch(true);
         }
     }
 
-    toggleShow(e) {
+    function toggleShow(e) {
         if (e.target.id === 'eye') {
             if (show) {
                 document.getElementById('password')
                     .setAttribute('type', 'password');
                 document.getElementById('eye').style.color = '#7a797e';
-                show = false;
+                setShow(false);
             } else {
                 document.getElementById('password')
                     .setAttribute('type', 'text');
                 document.getElementById('eye').style.color = '#5887ef';
-                show = true;
+                setShow(true);
             }
         } else {
             if (show) {
                 document.getElementById('confirm-password')
                     .setAttribute('type', 'password');
                 document.getElementById('c-eye').style.color = '#7a797e';
-                show = false;
+                setShow(false);
             } else {
                 document.getElementById('confirm-password')
                     .setAttribute('type', 'text');
                 document.getElementById('c-eye').style.color = '#5887ef';
-                show = true;
+                setShow(true);
             }
         }
     }
 
-    render() {
-        return (
+    return (
+        <div className='container'>
             <div className='form-container s-up'>
                 <header><h3>Create a Login account</h3></header>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <input
                         type='text'
                         placeholder='Name'
                         required
-                        onChange={e => this.setState({ name: e.target.value })}
+                        onChange={e => setName(e.target.value)}
                     />
                     <input
                         type='email'
                         placeholder='Email'
                         required
-                        onChange={e => this.setState({ email: e.target.value })}
+                        onChange={e => setEmail(e.target.value)}
                     />
                     <div className='password-container'>
                         <input
@@ -99,10 +92,10 @@ export default class SignUp extends Component {
                             type='password'
                             placeholder='Password'
                             required
-                            onChange={e => this.setState({ password: e.target.value })}
+                            onChange={e => setPassword(e.target.value)}
                         />
                         <span className='show-container'>
-                            <i id='eye' className="fa fa-eye" aria-hidden="true" onClick={this.toggleShow} />
+                            <i id='eye' className="fa fa-eye" aria-hidden="true" onClick={toggleShow} />
                         </span>
                     </div>
                     <div className='password-container'>
@@ -111,27 +104,29 @@ export default class SignUp extends Component {
                             type='password'
                             placeholder='Confirm your Password'
                             required
-                            onChange={e => this.setState({ confirmPassword: e.target.value })}
+                            onChange={e => setConfirmPassword(e.target.value)}
                         />
                         <span className='show-container'>
-                            <i id='c-eye' className="fa fa-eye" aria-hidden="true" onClick={this.toggleShow} />
+                            <i id='c-eye' className="fa fa-eye" aria-hidden="true" onClick={toggleShow} />
                         </span>
                     </div>
-                    {this.state.noMatch === true ? <p>Passwords don't match!</p> : <Fragment />}
+                    {noMatch ? <p>Passwords don't match!</p> : <Fragment />}
                     <div>
                         <button type='submit'>
                             SIGN UP
                         </button>
                         <span className='cliffhanger'>
-                            Already registered? <a href='/sign-in'>Login!</a>
+                            Already registered? <a href='/'>Login!</a>
                         </span>
                     </div>
-                    {this.state.success === true ?
+                    {success ?
                         <p className='success'>Successfully registered: Redirecting to Login...</p>
                         : <Fragment />}
                 </form>
                 <footer>Note: this page has the only purpose to show how the login api works</footer>
             </div>
-        )
-    }
+        </div>
+    )
 }
+
+export default SignUp;
