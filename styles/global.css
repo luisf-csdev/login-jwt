@@ -12,15 +12,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: all 350ms
 }
 
 body {
-  background-image: url(../assets/images/galaxy_bg.jpg);
+  background-image: url(../assets/images/galaxy_bg.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  backdrop-filter: blur(3px);
 }
 
 .container {
@@ -97,6 +95,8 @@ form {
   font-size: 1.7rem;
   color: #c6c4cf;
   color: #7a797e;
+  cursor: pointer;
+  transition: all 200ms;
 }
 
 .form-container p {
@@ -122,6 +122,7 @@ form {
   color: #E15F70;
   background-color: #e15f7000;
   cursor: pointer;
+  transition: all 300ms
 }
 
 .form-container button:hover {

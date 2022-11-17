@@ -6,14 +6,7 @@ function App({ Component, pageProps }) {
         <>
             <Head>
                 <title>Login JWT</title>
-                <link
-                    rel="shortcut icon"
-                    href="/images/favicon.ico"
-                />
-                <link
-                    rel="stylesheet"
-                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-                />
+                <link rel="shortcut icon" href="/images/favicon.ico" />
             </Head>
             <Component {...pageProps} />
         </>
