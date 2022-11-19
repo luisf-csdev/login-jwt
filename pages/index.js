@@ -1,42 +1,16 @@
-// import React from 'react';
-// import './App.css';
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-// import Login from './components/Login';
-// import SignUp from './components/SignUp';
-// import Profile from './components/Profile';
-
-// const logged = localStorage.getItem('logged')
-
-// function App() {
-//   return (
-//     <Router>
-//       <div className="container">
-//         <div className='auth-wrapper'>
-//           <div className='auth-inner'>
-//             <Routes>
-//               <Route exact path='/' element={logged ? <Profile /> : <Login />} />
-//               <Route path='/sign-in' element={<Login />} />
-//               <Route path='/sign-up' element={<SignUp />} />
-//               <Route path='/profile' element={<Profile />} />
-//             </Routes>
-//           </div>
-//         </div>
-//       </div>
-//     </Router>
-//   );
-// }
 import React, { useState, Fragment } from 'react';
 import Link from 'next/link';
 
-function Login() {
+function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fail, setFail] = useState(false)
   const [success, setSuccess] = useState(false);
   const [show, setShow] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    fetch('http://localhost:3001/login-user', {
+    await fetch('/api/login', {
       method: 'POST',
       crossDomain: true,
       headers: {
@@ -51,13 +25,17 @@ function Login() {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.status === 'ok') {
+        if (data.success) {
+          setFail(false);
           setSuccess(true);
           setTimeout(() => {
             window.localStorage.setItem('token', data.data);
             window.localStorage.setItem('logged', true)
-            window.location.href = './profile'
+            window.location.href = '/Profile'
           }, 1000);
+        } else {
+          setFail(true);
+          setSuccess(false);
         }
       })
   }
@@ -104,9 +82,10 @@ function Login() {
               LOG IN
             </button>
             <span className='cliffhanger'>
-              Not registered? <Link href='/SignUp'><a>Sign Up!</a></Link>
+              Not registered? <Link className='link' href='/SignUp'>Sign Up!</Link>
             </span>
           </div>
+          {fail ? <p className='fail'>Email or Password is incorrect!</p> : <Fragment />}
           {success ?
             <p className='success'>Success: Redirecting to Profile...</p>
             : <Fragment />}
@@ -117,4 +96,4 @@ function Login() {
   )
 }
 
-export default Login;
+export default SignIn;

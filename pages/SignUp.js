@@ -6,15 +6,16 @@ function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [userExists, setUserExists] = useState(false)
     const [success, setSuccess] = useState(false);
     const [show, setShow] = useState(false);
     const [noMatch, setNoMatch] = useState(false);
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         if (password === confirmPassword) {
             setNoMatch(false);
-            fetch('http://localhost:3001/register', {
+            await fetch('/api/register', {
                 method: 'POST',
                 crossDomain: true,
                 headers: {
@@ -30,11 +31,15 @@ function SignUp() {
             })
                 .then(res => res.json())
                 .then(data => {
-                    if (data.status === 'ok') {
+                    if (data.success) {
+                        setUserExists(false);
                         setSuccess(true);
                         setTimeout(() => {
-                            window.location.href = './sign-in'
+                            window.location.href = '/'
                         }, 1000);
+                    } else {
+                        setUserExists(true);
+                        setSuccess(false);
                     }
                 })
         } else {
@@ -92,6 +97,7 @@ function SignUp() {
                             id='password'
                             type='password'
                             placeholder='Password'
+                            minLength={8}
                             required
                             onChange={e => setPassword(e.target.value)}
                         />
@@ -104,6 +110,7 @@ function SignUp() {
                             id='confirm-password'
                             type='password'
                             placeholder='Confirm your Password'
+                            minLength={8}
                             required
                             onChange={e => setConfirmPassword(e.target.value)}
                         />
@@ -117,12 +124,13 @@ function SignUp() {
                             SIGN UP
                         </button>
                         <span className='cliffhanger'>
-                            Already registered? <Link href='/'><a>Login!</a></Link>
+                            Already registered? <Link className='link' href='/'>Login!</Link>
                         </span>
                     </div>
                     {success ?
                         <p className='success'>Successfully registered: Redirecting to Login...</p>
                         : <Fragment />}
+                    {userExists ? <p className='fail'>User already registered!</p> : <Fragment />}
                 </form>
                 <footer>Note: this page has the only purpose to show how the login api works</footer>
             </div>
