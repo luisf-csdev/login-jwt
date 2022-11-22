@@ -8,7 +8,8 @@ function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [userExists, setUserExists] = useState(false)
     const [success, setSuccess] = useState(false);
-    const [show, setShow] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [noMatch, setNoMatch] = useState(false);
 
     async function handleSubmit(e) {
@@ -49,28 +50,28 @@ function SignUp() {
 
     function toggleShow(e) {
         if (e.target.id === 'eye') {
-            if (show) {
+            if (showPassword) {
                 document.getElementById('password')
                     .setAttribute('type', 'password');
                 document.getElementById('eye').style.color = '#7a797e';
-                setShow(false);
+                setShowPassword(false);
             } else {
                 document.getElementById('password')
                     .setAttribute('type', 'text');
                 document.getElementById('eye').style.color = '#5887ef';
-                setShow(true);
+                setShowPassword(true);
             }
         } else {
-            if (show) {
+            if (showConfirmPassword) {
                 document.getElementById('confirm-password')
                     .setAttribute('type', 'password');
                 document.getElementById('c-eye').style.color = '#7a797e';
-                setShow(false);
+                setShowConfirmPassword(false);
             } else {
                 document.getElementById('confirm-password')
                     .setAttribute('type', 'text');
                 document.getElementById('c-eye').style.color = '#5887ef';
-                setShow(true);
+                setShowConfirmPassword(true);
             }
         }
     }

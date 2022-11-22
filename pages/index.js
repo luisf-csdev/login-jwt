@@ -6,7 +6,7 @@ function SignIn() {
   const [password, setPassword] = useState('');
   const [fail, setFail] = useState(false)
   const [success, setSuccess] = useState(false);
-  const [show, setShow] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -41,16 +41,16 @@ function SignIn() {
   }
 
   function toggleShow() {
-    if (show) {
+    if (showPassword) {
       document.getElementById('password')
         .setAttribute('type', 'password');
       document.getElementById('eye').style.color = '#7a797e';
-      setShow(false);
+      setShowPassword(false);
     } else {
       document.getElementById('password')
         .setAttribute('type', 'text');
       document.getElementById('eye').style.color = '#5887ef';
-      setShow(true);
+      setShowPassword(true);
     }
   }
 
