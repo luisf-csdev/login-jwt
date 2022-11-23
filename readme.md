@@ -42,7 +42,10 @@
 <br>
 
 ## 💾 Prerequisites
-You'll need to have the following tools installed on your machine:
+You'll need have a database inside a project on the MongoDB Cloud and connect to obtain the Mongo URI:
+- [MongoDB Cloud](https://cloud.mongodb.com/)
+
+Then you'll need to have the following tools installed on your machine:
 - [GIT](https://git-scm.com/)
 - [Node.js](https://nodejs.org/)
 
@@ -60,7 +63,11 @@ cd login-jwt
 # install the dependencies
 npm install
 
-# run the dev script
+# create a .env file in the directory's root with the mongo uri and the secret for your token
+MONGODB_URI = your mongodb uri
+TOKEN_SECRET = "any set of letters and numbers"
+
+# finally, run the dev script
 npm run dev
 
 # the app will start in port:3000 - access <http://localhost:3000>
