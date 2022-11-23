@@ -1,8 +1,8 @@
 <h1 align="center">Login JWT</h1>
 <div align="center">
-    <img src="https://img.shields.io/github/license/luisf-csdev/chat-rooms">
-    <img src="https://img.shields.io/github/stars/luisf-csdev/chat-rooms">
-    <img src="https://img.shields.io/github/forks/luisf-csdev/chat-rooms">
+    <img src="https://img.shields.io/github/license/luisf-csdev/login-jwt">
+    <img src="https://img.shields.io/github/stars/luisf-csdev/login-jwt">
+    <img src="https://img.shields.io/github/forks/luisf-csdev/login-jwt">
     <a href="https://twitter.com/luisf_csdev/status/1594989881939345409" target="_blank" rel="noreferrer noopener">
         <img src="https://img.shields.io/twitter/url?label=Login%20JWT&logoColor=aa4450&style=social&url=https%3A%2F%2Ftwitter.com%2Fluisf_csdev%2Fstatus%2F1594989881939345409">
     </a>
