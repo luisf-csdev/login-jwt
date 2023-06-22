@@ -32,7 +32,7 @@
 - [x] Credentials only showed when a user is logged
 <br>
 
-## [🚪TRY IT YOURSELF🚪](https://chat-rooms-socket.netlify.app/)
+## [🚪TRY IT YOURSELF🚪](https://login-jwt-ruby.vercel.app/)
 <div align="center">
     <img alt="gif-2" width="450rem"  src="./github/login-jwt-gif1.gif">
     <img alt="gif-2" width="450rem"  src="./github/login-jwt-gif2.gif">
